@@ -43,11 +43,13 @@ An example of our data sample is below:
 We divide consumption into <strong>4</strong> categories, which are: <strong>Catering</strong>、<strong>Entertainment</strong>、<strong>Shopping</strong>、<strong>Living</strong>. 
 
 The following pie charts describes the number of consumption types in the first four dataset.
-<div align="center">
 
-| ![Age Pie](images/image_1.png) | ![Region Pie](images/image_1.png) |
+
+| ![2024.01-2024.03](images/dataset1.png) | ![2024.04-2024.06](images/dataset2.png) |
 |----------|----------|
-| ![Device Pie](https://example.com/device.png) | ![Source Pie](https://example.com/source.png) |
+| <p align="center"><strong>2024.01-2024.03</strong></p> | <p align="center"><strong>2024.04-2024.06</strong></p>  |
+| ![2024.07-2024.09](images/dataset3.png) | ![2024.10-2024.12](images/dataset4.png) |
+| <p align="center"><strong>2024.07-2024.09</strong></p>  | <p align="center"><strong>2024.10-2024.12</strong></p>  |
 
 
 
@@ -57,7 +59,7 @@ The following pie charts describes the number of consumption types in the first 
 | Name          | QMUL Student ID | BUPT Student ID |
 |---------------|----------|---------|
 | <a href="http://39.108.48.32/mipl/news/news.php?id=EGgengzijun"><strong>Zijun Geng</strong></a>| 221170571 | 2022213671 |
-| <a href="https://github.com/monet-uta"><strong>Ye Wang</strong></a>|   |     |
+| <a href="https://github.com/monet-uta"><strong>Ye Wang</strong></a>| 221170618 | 2022213666 |
 | <a href="https://github.com/Wenrui2"><strong>Wenrui Bai</strong></a>| 221170504 | 2022213667 |
 | <a href="https://github.com/zhoujiayi2022213672"><strong>Jiayi Zhou</strong></a>| 221170630 | 2022213672 |
 | <a href="https://github.com/HeYihui-Amos"><strong>Yihui He</strong></a>| 221170641 | 2022213679 |
