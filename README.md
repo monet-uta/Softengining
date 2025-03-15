@@ -40,13 +40,17 @@ An example of our data sample is below:
 |---------------|----------|---------|
 |2024/3/1 18:11 | Catering	 | ￥14.00 |
 
-We divide consumption into 4 categories, which are: <strong>Catering</strong>、<strong>Entertainment</strong>、<strong>Shopping</strong>、<strong>Living</strong>. The following pie charts describes the number of consumption types in each dataset.
+We divide consumption into <strong>4</strong> categories, which are: <strong>Catering</strong>、<strong>Entertainment</strong>、<strong>Shopping</strong>、<strong>Living</strong>. 
 
-<img src="images/dataset1.png" alt="Image 1" width="400" style="margin: 0 10px;" /> 
-<img src="images/dataset2.png" alt="Image 2" width="400" style="margin: 0 10px;" /> 
-<img src="images/dataset3.png" alt="Image 3" width="400" style="margin: 0 10px;" /> 
-<img src="images/dataset4.png" alt="Image 4" width="200" style="margin: 0 10px;" /> 
-<img src="images/dataset5.png" alt="Image 5" width="200" style="margin: 0 10px;" />
+The following pie charts describes the number of consumption types in the first four dataset.
+<div align="center">
+
+| ![Age Pie](images/image_1.png) | ![Region Pie](images/image_1.png) |
+|----------|----------|
+| ![Device Pie](https://example.com/device.png) | ![Source Pie](https://example.com/source.png) |
+
+
+
 
 ## 🤝 Student Information
 
