@@ -10,7 +10,7 @@
     ·
      <strong>Jiayi Zhou</strong>
     ·
-     <strong>Yihui He</strong>
+     <a href="https://github.com/HeYihui-Amos"><strong>Yihui He</strong></a>
     ·
      <strong>Yuyuan Zhao</strong>
     ·
