@@ -58,13 +58,13 @@ The following pie charts describes the number of consumption types in the first 
 
 | Name          | QMUL Student ID | BUPT Student ID |
 |---------------|----------|---------|
-| <a href="http://39.108.48.32/mipl/news/news.php?id=EGgengzijun"><strong>Zijun Geng</strong></a>| 221170571 | 2022213671 |
-| <a href="https://github.com/monet-uta"><strong>Ye Wang</strong></a>| 221170618 | 2022213666 |
-| <a href="https://github.com/Wenrui2"><strong>Wenrui Bai</strong></a>| 221170504 | 2022213667 |
-| <a href="https://github.com/zhoujiayi2022213672"><strong>Jiayi Zhou</strong></a>| 221170630 | 2022213672 |
-| <a href="https://github.com/HeYihui-Amos"><strong>Yihui He</strong></a>| 221170641 | 2022213679 |
-| <a href="https://github.com/Gh0Zy"><strong>Yuyuan Zhao</strong></a>| 221170445 | 2022213683 |
-| <a href="https://github.com/yymm1234"><strong>Wenxuan Zeng</strong></a>| 221169841 | 2022213608 |
+| <p align="center"><a href="https://github.com/gengzijun"><strong>Zijun Geng</strong></a></p>| <p align="center"><strong>221170571</strong></p> | <p align="center"><strong>2022213671</strong></p> |
+| <p align="center"><a href="https://github.com/monet-uta"><strong>Ye Wang</strong></a></p>| <p align="center"><strong>221170618</strong></p> | <p align="center"><strong>2022213666</strong></p> |
+| <p align="center"><a href="https://github.com/Wenrui2"><strong>Wenrui Bai</strong></a></p>| <p align="center"><strong>221170504</strong></p> | <p align="center"><strong>2022213667</strong></p> |
+| <p align="center"><a href="https://github.com/zhoujiayi2022213672"><strong>Jiayi Zhou</strong></a></p>| <p align="center"><strong>221170630</strong></p> | <p align="center"><strong>2022213672</strong></p> |
+| <p align="center"><a href="https://github.com/HeYihui-Amos"><strong>Yihui He</strong></a></p>| <p align="center"><strong>221170641</strong></p> | <p align="center"><strong>2022213679</strong></p> |
+| <p align="center"><a href="https://github.com/Gh0Zy"><strong>Yuyuan Zhao</strong></a></p>| <p align="center"><strong>221170445</strong></p> | <p align="center"><strong>2022213683</strong></p> |
+| <p align="center"><a href="https://github.com/yymm1234"><strong>Wenxuan Zeng</strong></a></p>| <p align="center"><strong>221169841</strong></p> | <p align="center"><strong>2022213608</strong></p> |
 
 ## 📜 Citation
 ```bib
