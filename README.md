@@ -25,7 +25,10 @@
 <br>
 
 ## 📣 News
+- [03/15/2025] We release our dataset!
 - [03/15/2025] Our prototype is comming soon. Stay tuned! 
+
+
 
 ## 🤝 Student Information
 
