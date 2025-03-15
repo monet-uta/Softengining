@@ -35,7 +35,7 @@
 | <a href="https://github.com/zhoujiayi2022213672"><strong>Jiayi Zhou</strong></a>| 221170630 | 2022213672 |
 | <a href="https://github.com/HeYihui-Amos"><strong>Yihui He</strong></a>| 221170641 | 2022213679 |
 | <a href="https://github.com/Gh0Zy"><strong>Yuyuan Zhao</strong></a>|     |      |
-| <a href="https://github.com/yymm1234"><strong>Wenxuan Zeng</strong></a>|     |     |
+| <a href="https://github.com/yymm1234"><strong>Wenxuan Zeng</strong></a>| 221169841 | 2022213608 |
 
 ## Citation
 ```bib
