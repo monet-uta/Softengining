@@ -2,7 +2,7 @@
 <p align="center">
   <h1 align="center">🌋 Software Engininging</h1>
   <p align="center">
-    <a href="http://39.108.48.32/mipl/news/news.php?id=EGgengzijun"><strong>Zijun Geng</strong></a>
+    <a href="https://github.com/gengzijun"><strong>Zijun Geng</strong></a>
     ·
     <a href="https://github.com/monet-uta"><strong>Ye Wang</strong></a>
     ·
