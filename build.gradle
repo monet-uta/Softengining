@@ -1,5 +1,9 @@
 plugins {
     id 'java'
+
+    id 'application'
+    // 添加 JavaFX 插件
+    id 'org.openjfx.javafxplugin' version '0.0.10'
 }
 
 group = 'org.example'
@@ -29,10 +33,10 @@ dependencies {
 
     // 添加一个简单的日志实现，例如 slf4j-simple
     implementation 'org.slf4j:slf4j-simple:1.7.32'
+    implementation 'org.slf4j:slf4j-simple:1.7.32'
 
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
 }
 
 test {
