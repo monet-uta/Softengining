@@ -28,7 +28,8 @@
 <br>
 
 ## 📣 News
-- [03/21/2025] 🔥 We finish our first check!!!
+- [04/11/2025] 🔥 We release our app version1!!!
+- [03/21/2025] We finish our first check!!!
 - [03/15/2025] We release our datasets structure!
 - [03/15/2025] Our prototype is comming soon. Stay tuned! 
 
