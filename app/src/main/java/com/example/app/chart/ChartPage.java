@@ -118,7 +118,7 @@ public class ChartPage {
 
         switchView("month", btnMonth, btnQuarter, btnYear);
 
-        return new Scene(root, 1200, 900);
+        return new Scene(root, 1400, 900);
     }
 
     private void switchView(String view, Button btnMonth, Button btnQuarter, Button btnYear) {

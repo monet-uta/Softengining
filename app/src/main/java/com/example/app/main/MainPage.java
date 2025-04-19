@@ -1,5 +1,6 @@
 package com.example.app.main;
 
+import com.example.app.model.TransactionRecord;
 import javafx.collections.*;
 import javafx.geometry.*;
 import javafx.scene.Scene;
@@ -9,13 +10,20 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.*;
-
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.example.app.history.HistoryPage;
 import com.example.app.chart.ChartPage;
+import com.example.app.Main;
 
+import java.math.BigDecimal;
 public class MainPage {
 
     private final Stage stage;
@@ -239,6 +247,7 @@ public class MainPage {
         }
     }
 
+
     private void importDataFromCSV() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Import CSV Files");
@@ -248,42 +257,118 @@ public class MainPage {
         if (files != null && !files.isEmpty()) {
             ObservableList<Expense> importedData = FXCollections.observableArrayList();
 
-            for (File file : files) {
-                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                    String line;
-                    boolean isFirstLine = true;
+            // 显示加载提示框
+            Alert loadingAlert = new Alert(AlertType.INFORMATION);
+            loadingAlert.setTitle("AI识别中");
+            loadingAlert.setHeaderText("AI正在识别交易记录，请稍候...");
+            loadingAlert.setContentText("识别过程中请勿进行其他操作");
+            loadingAlert.getButtonTypes().setAll(ButtonType.CLOSE);
+            loadingAlert.show();
 
-                    while ((line = reader.readLine()) != null) {
-                        if (isFirstLine) {
-                            isFirstLine = false; // 跳过每个文件的表头
-                            continue;
-                        }
+            // 在后台线程中处理文件以避免阻塞UI线程
+            new Thread(() -> {
+                for (File file : files) {
+                    String filepath = file.getAbsolutePath();
+                    List<TransactionRecord> records = Main.processFile(filepath);
 
-                        String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                        if (fields.length >= 4) {
-                            String rawDateTime = fields[0].trim();
-                            String type = fields[1].trim();
-                            String detail = fields[2].trim();
-                            String rawAmount = fields[3].trim();
+                    // 遍历 records 并构建 Expense 对象
+                    for (TransactionRecord record : records) {
+                        // 从 TransactionRecord 中提取相关信息
+                        LocalDateTime transactionTime = record.getTransactionTime();
+                        String detail = record.getTransactionObject();
+                        BigDecimal amount = record.getAmount();
+                        String type = record.getAiCategory(); // 使用 AI 分类结果作为类型
 
-                            String date = rawDateTime;
-                            String amount = rawAmount.replaceAll("[^\\d.\\-]", "").trim();
+                        // 将 LocalDateTime 格式化为字符串，并将 'T' 替换为空格
+                        String date = transactionTime.toString().replace('T', ' ');
 
-                            Expense e = new Expense(date, detail, amount, type);
-                            importedData.add(e);
-                        }
+                        String amountStr = amount.toString(); // 如果需要特定格式，可以格式化金额
+
+                        // 假设 Expense 构造函数接受 date、detail、amount、type 参数
+                        Expense e = new Expense(date, detail, amountStr, type);
+                        Platform.runLater(() -> importedData.add(e));
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
-            }
 
-            data.addAll(importedData); // 用 addAll(importedData)
-            saveDataToFile();
-            table.setItems(data);
-            updateTotalAndWarning();
+                // 完成所有文件处理后，通知用户
+                Platform.runLater(() -> {
+                    loadingAlert.close(); // 关闭加载提示框
+                    data.addAll(importedData); // 将导入的数据添加到主数据列表
+                    saveDataToFile();
+                    table.setItems(data);
+                    updateTotalAndWarning();
+
+                    // 显示完成提示
+                    Alert completeAlert = new Alert(AlertType.INFORMATION);
+                    completeAlert.setTitle("完成");
+                    completeAlert.setHeaderText("AI识别完成！");
+                    completeAlert.setContentText("交易记录已成功导入并分类");
+                    completeAlert.showAndWait();
+                });
+            }).start();
         }
     }
+
+
+//    private void importDataFromCSV() {
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Import CSV Files");
+//        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+//
+//        List<File> files = fileChooser.showOpenMultipleDialog(null);
+//        if (files != null && !files.isEmpty()) {
+//            ObservableList<Expense> importedData = FXCollections.observableArrayList();
+//
+//            for (File file : files) {
+//                String filepath = file.getAbsolutePath();
+//                List<TransactionRecord> records = Main.processFile(filepath);
+//
+//                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+//                    String line;
+//                    boolean isFirstLine = true;
+//
+//                    while ((line = reader.readLine()) != null) {
+//                        if (isFirstLine) {
+//                            isFirstLine = false; // 跳过每个文件的表头
+//                            continue;
+//                        }
+//
+//                        String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+//                        if (fields.length >= 4) {
+//                            String rawDateTime = fields[0].trim();
+//                            String type = fields[1].trim();
+//                            String detail = fields[2].trim();
+//                            String rawAmount = fields[3].trim();
+//
+//                            String date = rawDateTime;
+//                            String amount = rawAmount.replaceAll("[^\\d.\\-]", "").trim();
+//
+//                            Expense e = new Expense(date, detail, amount, type);
+//                            importedData.add(e);
+//                        }
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
+//                for (TransactionRecord record : records) {
+//                    LocalDateTime transactionTime = record.getTransactionTime();
+//                    String detail = record.getTransactionObject();
+//                    BigDecimal amount = record.getAmount();
+//                    String type = record.getAiCategory();
+//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//                    String date = transactionTime.format(formatter);
+//                    String amountStr = amount.toString();
+//                    Expense e = new Expense(date, detail, amountStr, type);
+//                    importedData.add(e);
+//                }
+//            }
+//
+//            data.addAll(importedData); // 用 addAll(importedData)
+//            saveDataToFile();
+//            table.setItems(data);
+//            updateTotalAndWarning();
+//        }
+//    }
 
     private void updateTotalAndWarning() {
         double total = 0.0;

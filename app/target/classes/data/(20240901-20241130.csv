@@ -1,4 +1,3 @@
-[2024-09-01 00:00:00]-[2024-11-30 23:59:59],,,
 Transaction time,Type,Transaction object,Amount (RMB)
 2024/11/30 13:01,Shopping,DMALL,гд9.90
 2024/11/29 23:59,Shopping,DMALL,гд7.90
@@ -59,6 +58,7 @@ Transaction time,Type,Transaction object,Amount (RMB)
 2024/11/1 18:54,Entertainment,Tencent,гд15.00
 2024/11/1 12:45,Living,BUPT,гд30.00
 2024/11/1 12:41,Catering,BUPT,гд16.50
+2024/11/1 8:40,Income,ICBC,"гд8,000"
 2024/10/31 16:30,Living,Jinghe,гд21.90
 2024/10/31 12:14,Shopping,DMALL,гд8.00
 2024/10/29 15:16,Catering,Shanhetun,гд74.00
@@ -131,6 +131,7 @@ Transaction time,Type,Transaction object,Amount (RMB)
 2024/10/1 13:37,Catering,Meituan,гд188.00
 2024/10/1 13:05,Catering,Meituan,гд15.90
 2024/10/1 8:41,Shopping,Fruit shop,гд5.00
+2024/10/1 8:40,Income,ICBC,"гд8,000"
 2024/9/30 22:50,Catering,Meituan,гд28.00
 2024/9/30 21:00,Living,Guaishou Charge,гд8.00
 2024/9/30 17:44,Living,Xiaodian,гд4.00
@@ -187,3 +188,4 @@ Transaction time,Type,Transaction object,Amount (RMB)
 2024/9/7 22:57,Catering,Beef noodles,гд14.00
 2024/9/6 15:01,Catering,Canteen,гд6.00
 2024/9/5 16:47,Catering,Xiaojie Tianfu,гд8.00
+2024/9/1 16:40,Income,ICBC,"гд8,000"

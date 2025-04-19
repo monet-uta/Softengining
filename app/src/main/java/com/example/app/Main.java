@@ -11,11 +11,11 @@ import java.time.Duration;
 import java.util.*;
 import io.github.cdimascio.dotenv.Dotenv;
 
-
+import com.example.app.main.MainPage;
 //TIP 要<b>运行</b>代码，请按 <shortcut actionId="Run"/> 或
 // 点击装订区域中的 <icon src="AllIcons.Actions.Execute"/> 图标。
 public class Main {
-    public static void main(String[] args) {
+    public static List<TransactionRecord> processFile(String filepath) {
         //TIP 当文本光标位于高亮显示的文本处时按 <shortcut actionId="ShowIntentionActions"/>
         // 查看 IntelliJ IDEA 建议如何修正。
         System.out.printf("Main start!\n");
@@ -27,16 +27,15 @@ public class Main {
 
 
 
-        String filepath = "src/main/resources/data/(20240101-20240229).csv";
-        String filepatht = "src/main/resources/data/test.csv";
+//        String filepath = "src/main/resources/data/(20240101-20240229).csv";
+//        String filepatht = "src/main/resources/data/test.csv";
 
-        List<TransactionRecord> records = CsvParser.parseCSV(filepatht);
+        List<TransactionRecord> records = CsvParser.parseCSV(filepath);
 
         OpenAiChatModel model_h = OpenAiChatModel
                 .builder()
                 .baseUrl("https://ark.cn-beijing.volces.com/api/v3/")
-                .apiKey(huoshan_api_key)
-//                .apiKey("7c33c13c-2d6f-4fdd-be8b-d7c8b3df92d9")
+                .apiKey("7c33c13c-2d6f-4fdd-be8b-d7c8b3df92d9")
                 .modelName("deepseek-v3-250324")
                 .temperature(0.01)
                 .timeout(Duration.ofSeconds(60))
@@ -55,6 +54,7 @@ public class Main {
         // 输出最终结果
         System.out.println("\n result");
         records.forEach(System.out::println);
+        return records;
 
     }
 
