@@ -17,7 +17,13 @@ import javafx.scene.control.ButtonType;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.nio.file.*;
+
+import java.util.*;
+
 
 import com.example.app.history.HistoryPage;
 import com.example.app.chart.ChartPage;
@@ -246,8 +252,6 @@ public class MainPage {
             }
         }
     }
-
-
     private void importDataFromCSV() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Import CSV Files");
@@ -267,6 +271,11 @@ public class MainPage {
 
             // 在后台线程中处理文件以避免阻塞UI线程
             new Thread(() -> {
+                Platform.runLater(() -> {
+                    data.clear(); // 清空主数据列表
+                    table.setItems(data); // 更新表格显示
+                });
+
                 for (File file : files) {
                     String filepath = file.getAbsolutePath();
                     List<TransactionRecord> records = Main.processFile(filepath);
@@ -278,12 +287,9 @@ public class MainPage {
                         String detail = record.getTransactionObject();
                         BigDecimal amount = record.getAmount();
                         String type = record.getAiCategory(); // 使用 AI 分类结果作为类型
-
                         // 将 LocalDateTime 格式化为字符串，并将 'T' 替换为空格
                         String date = transactionTime.toString().replace('T', ' ');
-
                         String amountStr = amount.toString(); // 如果需要特定格式，可以格式化金额
-
                         // 假设 Expense 构造函数接受 date、detail、amount、type 参数
                         Expense e = new Expense(date, detail, amountStr, type);
                         Platform.runLater(() -> importedData.add(e));
@@ -294,6 +300,7 @@ public class MainPage {
                 Platform.runLater(() -> {
                     loadingAlert.close(); // 关闭加载提示框
                     data.addAll(importedData); // 将导入的数据添加到主数据列表
+                    savePredictedDataToCSV(importedData);
                     saveDataToFile();
                     table.setItems(data);
                     updateTotalAndWarning();
@@ -308,67 +315,6 @@ public class MainPage {
             }).start();
         }
     }
-
-
-//    private void importDataFromCSV() {
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Import CSV Files");
-//        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-//
-//        List<File> files = fileChooser.showOpenMultipleDialog(null);
-//        if (files != null && !files.isEmpty()) {
-//            ObservableList<Expense> importedData = FXCollections.observableArrayList();
-//
-//            for (File file : files) {
-//                String filepath = file.getAbsolutePath();
-//                List<TransactionRecord> records = Main.processFile(filepath);
-//
-//                try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-//                    String line;
-//                    boolean isFirstLine = true;
-//
-//                    while ((line = reader.readLine()) != null) {
-//                        if (isFirstLine) {
-//                            isFirstLine = false; // 跳过每个文件的表头
-//                            continue;
-//                        }
-//
-//                        String[] fields = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-//                        if (fields.length >= 4) {
-//                            String rawDateTime = fields[0].trim();
-//                            String type = fields[1].trim();
-//                            String detail = fields[2].trim();
-//                            String rawAmount = fields[3].trim();
-//
-//                            String date = rawDateTime;
-//                            String amount = rawAmount.replaceAll("[^\\d.\\-]", "").trim();
-//
-//                            Expense e = new Expense(date, detail, amount, type);
-//                            importedData.add(e);
-//                        }
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//                for (TransactionRecord record : records) {
-//                    LocalDateTime transactionTime = record.getTransactionTime();
-//                    String detail = record.getTransactionObject();
-//                    BigDecimal amount = record.getAmount();
-//                    String type = record.getAiCategory();
-//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//                    String date = transactionTime.format(formatter);
-//                    String amountStr = amount.toString();
-//                    Expense e = new Expense(date, detail, amountStr, type);
-//                    importedData.add(e);
-//                }
-//            }
-//
-//            data.addAll(importedData); // 用 addAll(importedData)
-//            saveDataToFile();
-//            table.setItems(data);
-//            updateTotalAndWarning();
-//        }
-//    }
 
     private void updateTotalAndWarning() {
         double total = 0.0;
@@ -470,5 +416,73 @@ public class MainPage {
         }
 
         table.setItems(recent); // 仅显示最近几条
+    }
+
+    private void savePredictedDataToCSV(List<Expense> expenses) {
+        // 创建一个映射，键为月份（格式为 YYYYMM），值为该月份的 Expense 列表
+        Map<String, List<Expense>> expensesByMonth = new HashMap<>();
+
+        for (Expense expense : expenses) {
+            // 解析日期字符串为 LocalDateTime
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dateTime = LocalDateTime.parse(expense.getDate(), formatter);
+
+            // 格式化为 YYYYMM
+            String month = dateTime.format(DateTimeFormatter.ofPattern("yyyyMM"));
+
+            // 将 Expense 添加到对应月份的列表中
+            expensesByMonth.computeIfAbsent(month, (k) -> new ArrayList<>()).add(expense);
+        }
+
+        // 获取历史数据目录
+        String directoryPath = "src/main/resources/history";
+        File directory = new File(directoryPath);
+
+        // 如果目录不存在，则创建目录
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        // 遍历每个月份的数据并保存到对应的 CSV 文件
+        for (Map.Entry<String, List<Expense>> entry : expensesByMonth.entrySet()) {
+            String month = entry.getKey();
+            List<Expense> monthExpenses = entry.getValue();
+            String fileName = month + ".csv";
+            Path filePath = Paths.get(directoryPath, fileName);
+
+            // 写入表头和数据
+            try {
+                // 检查文件是否存在，如果不存在则写入表头
+                boolean fileExists = Files.exists(filePath);
+                try (BufferedWriter writer = Files.newBufferedWriter(filePath, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+                    if (!fileExists) {
+                        writer.write("Task,Date,Detail,Amount,Type\n");
+                    }
+
+                    int i = 1; // 用于生成 Ex-1, Ex-2, etc.
+                    for (Expense e : monthExpenses) {
+                        writer.write(String.format("%s,%s,%s,%s,%s\n",
+                                "Ex-" + i, e.getDate(), e.getContent(), e.getAmount(), e.getType()));
+                        i++;
+                    }
+                }
+
+                // 提示用户数据已保存
+                Alert saveAlert = new Alert(Alert.AlertType.INFORMATION);
+                saveAlert.setTitle("保存成功");
+                saveAlert.setHeaderText("预测数据已成功保存");
+                saveAlert.setContentText("文件路径: " + filePath.toString());
+                saveAlert.showAndWait();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+
+                // 提示用户保存失败
+                Alert saveErrorAlert = new Alert(Alert.AlertType.ERROR);
+                saveErrorAlert.setTitle("保存失败");
+                saveErrorAlert.setHeaderText("无法保存预测数据");
+                saveErrorAlert.setContentText("错误信息: " + ex.getMessage());
+                saveErrorAlert.showAndWait();
+            }
+        }
     }
 }

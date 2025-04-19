@@ -9,7 +9,7 @@ public class DataRecord {
     private final SimpleStringProperty amount;
     private final SimpleStringProperty date;
 
-    public DataRecord(String task, String detail, String type, String amount, String date) {
+    public DataRecord(String task, String date, String detail, String amount, String type) {
         this.task = new SimpleStringProperty(task);
         this.detail = new SimpleStringProperty(detail);
         this.type = new SimpleStringProperty(type);

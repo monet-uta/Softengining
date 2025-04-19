@@ -56,7 +56,7 @@ public class HistoryPage {
 
         VBox menuList = new VBox(10);
 
-        List<String> month_list = List.of("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+        List<String> month_list = List.of("202401", "202402", "202403", "202404", "202405", "202406", "202407", "202408", "202409", "202410", "202411", "202412");
         for (String month : month_list) {
             HBox item = new HBox(10);
             item.setPadding(new Insets(10));
@@ -72,11 +72,20 @@ public class HistoryPage {
             item.setOnMouseClicked(e -> {
                 System.out.println("点击了月份：" + month);
                 ObservableList<DataRecord> newData = loadCSVData(month);
-                table.setItems(newData);
-                originalData = FXCollections.observableArrayList(newData); // 保存原始数据
-                // 每次点击月份时，清空搜索框并重置筛选类别
-                searchField.clear();
-                comboBox.setValue("All information"); // Reset to "All information"
+                if (newData.isEmpty()) {
+                    // 显示提示信息
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("数据未上传");
+                    alert.setHeaderText("该月份的数据尚未上传");
+                    alert.setContentText("请点击上传按钮上传数据");
+                    alert.showAndWait();
+                } else {
+                    table.setItems(newData);
+                    originalData = FXCollections.observableArrayList(newData); // 保存原始数据
+                    // 每次点击月份时，清空搜索框并重置筛选类别
+                    searchField.clear();
+                    comboBox.setValue("All information"); // Reset to "All information"
+                }
             });
 
             menuList.getChildren().add(item);
@@ -93,7 +102,7 @@ public class HistoryPage {
         Label titleLabel = new Label("Transaction History");
         titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold;");
 
-        comboBox.getItems().addAll("All information", "Task", "Detail", "Type", "Amount", "Date");
+        comboBox.getItems().addAll("All information", "Task", "Date", "Detail", "Amount", "Type");
         comboBox.setPromptText("All information");
         comboBox.setStyle(
                 "-fx-background-color: white;" + // 背景白色
@@ -136,6 +145,10 @@ public class HistoryPage {
         taskCol.setCellValueFactory(new PropertyValueFactory<>("task"));
         taskCol.setStyle("-fx-alignment: CENTER-LEFT; -fx-font-weight: bold; -fx-text-fill: #333;");
 
+        TableColumn<DataRecord, String> dateCol = new TableColumn<>("Date");
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateCol.setStyle("-fx-alignment: CENTER; -fx-font-weight: bold; -fx-text-fill: #333;");
+
         TableColumn<DataRecord, String> detailCol = new TableColumn<>("Detail");
         detailCol.setCellValueFactory(new PropertyValueFactory<>("detail"));
         detailCol.setStyle("-fx-alignment: CENTER-LEFT; -fx-font-weight: bold; -fx-text-fill: #333;");
@@ -148,12 +161,9 @@ public class HistoryPage {
         amountCol.setCellValueFactory(new PropertyValueFactory<>("amount"));
         amountCol.setStyle("-fx-alignment: CENTER; -fx-font-weight: bold; -fx-text-fill: #333;");
 
-        TableColumn<DataRecord, String> dateCol = new TableColumn<>("Date");
-        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-        dateCol.setStyle("-fx-alignment: CENTER; -fx-font-weight: bold; -fx-text-fill: #333;");
 
         if (table.getColumns().isEmpty()) {
-            table.getColumns().addAll(taskCol, detailCol, typeCol, amountCol, dateCol);
+            table.getColumns().addAll(taskCol, dateCol, detailCol, amountCol, typeCol);
         }
 
         table.setStyle("""
@@ -212,7 +222,7 @@ public class HistoryPage {
 
     private ObservableList<DataRecord> loadCSVData(String month) {
         ObservableList<DataRecord> data = FXCollections.observableArrayList();
-        String filePath = "data/" + month + ".csv";
+        String filePath = "src/main/resources/history/" + month + ".csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             br.readLine(); // 跳过第一行标题
