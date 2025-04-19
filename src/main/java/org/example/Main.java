@@ -11,6 +11,8 @@ import java.time.Duration;
 import java.util.*;
 import io.github.cdimascio.dotenv.Dotenv;
 
+import static org.example.model.TransactionRecord.calculateTimeBasedCategoryTotals;
+
 
 //TIP 要<b>运行</b>代码，请按 <shortcut actionId="Run"/> 或
 // 点击装订区域中的 <icon src="AllIcons.Actions.Execute"/> 图标。
@@ -30,7 +32,7 @@ public class Main {
         String filepath = "src/main/resources/data/(20240101-20240229).csv";
         String filepatht = "src/main/resources/data/test.csv";
 
-        List<TransactionRecord> records = CsvParser.parseCSV(filepath);
+        List<TransactionRecord> records = CsvParser.parseCSV(filepatht);
 
 //        String apiKey = System.getenv("");
 
@@ -76,6 +78,33 @@ public class Main {
         System.out.println("\n result");
         records.forEach(System.out::println);
 
+        Map<String, Map<String, BigDecimal>> timeBasedTotals = calculateTimeBasedCategoryTotals(records);
+
+        System.out.println("\n 最新月分类支出：");
+        timeBasedTotals.get("monthly").forEach((category, amount) -> System.out.println(category + ": " + amount));
+
+        System.out.println("\n最新季度分类支出：");
+        timeBasedTotals.get("quarterly").forEach((category, amount) -> System.out.println(category + ": " + amount));
+
+        System.out.println("\n最新年分类支出：");
+        timeBasedTotals.get("yearly").forEach((category, amount) -> System.out.println(category + ": " + amount));
+
+        Map<String, BigDecimal> latestMonth = timeBasedTotals.get("monthly");
+        Map<String, BigDecimal> latestQuarter = timeBasedTotals.get("quarterly");
+        Map<String, BigDecimal> latestYear = timeBasedTotals.get("yearly");
+
+        System.out.println("\nAI 建议：");
+
+        String monthPrompt = buildAdvicePrompt(latestMonth, "一个月");
+        System.out.println("月度建议：\n" + model_h.chat(monthPrompt));
+
+        String quarterPrompt = buildAdvicePrompt(latestQuarter, "一个季度");
+        System.out.println("季度建议：\n" + model_h.chat(quarterPrompt));
+
+        String yearPrompt = buildAdvicePrompt(latestYear, "一年");
+        System.out.println("年度建议：\n" + model_h.chat(yearPrompt));
+
+
     }
 
     private static List<List<TransactionRecord>> splitIntoBatches(List<TransactionRecord> records, int batchSize) {
@@ -101,6 +130,21 @@ public class Main {
 
         return prompt.toString();
     }
+
+    private static String buildAdvicePrompt(Map<String, BigDecimal> categoryTotals, String periodName) {
+        StringBuilder prompt = new StringBuilder();
+        prompt.append("你是一个家庭理财顾问。以下是我最近")
+                .append(periodName)
+                .append("的分类支出情况，请根据这些数据提供一些节省开支或优化消费的建议（中文输出）：\n\n");
+
+        for (Map.Entry<String, BigDecimal> entry : categoryTotals.entrySet()) {
+            prompt.append("- ").append(entry.getKey()).append(": ")
+                    .append(entry.getValue()).append(" 元\n");
+        }
+
+        return prompt.toString();
+    }
+
 
     private static void fillCategories(List<TransactionRecord> batch, String response) {
         try {
@@ -135,5 +179,7 @@ public class Main {
             e.printStackTrace();
         }
     }
+
+
 
 }
