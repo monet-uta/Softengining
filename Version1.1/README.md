@@ -36,3 +36,7 @@ Version 1.1 builds on the UI foundation by introducing a basic AI-powered classi
 - Classification is based on static mappings or mock data
 - Accuracy may vary without a dynamic backend model
 
+## ✅ Version 1.1 (Localization & Alerts)
+
+- **Story 4 - Localized Financial Scenarios**: Adapts to Chinese user spending patterns and holidays for more accurate categorization.
+- **Story 5 - Over-Budget Alert**: Alerts users when spending exceeds budget and provides category-specific overage details and suggestions.
