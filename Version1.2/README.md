@@ -4,7 +4,7 @@ Compared to version 1.1, version 1.2 adds historical data retention and display.
 
 # 🖼️ Screens and Navigation
 
-## Main Page (`MainPage.java`)
+## 🏠 Main Page (`MainPage.java`)
 <img width="899" alt="dbcfc72383dbe24becbf4918c572a82" src="https://github.com/user-attachments/assets/4d46762b-ef41-4208-b3f3-21c69990181b" />
 
 ### 📋 1.1 Data Type
@@ -55,7 +55,7 @@ Implements JavaFX's `StringProperty` for real-time binding between data and UI c
 | 4        | Localized Financial Scenarios | As a Chinese user, I want the software to recognize and adapt to localized financial scenarios.           | Uses RMB symbol (￥) consistently; date and amount formatting comply with local user habits.               |
 | 5        | Over-budget Alert          | As a budget-conscious individual, I want alerts when my spending exceeds my budget to adjust spending timely. | Sets monthly budget and provides visual alerts (red warning icon) when spending exceeds budget.            |
 
-## History Page (`HistoryPage.java`)
+## 🕰️ History Page (`HistoryPage.java`)
 
 The history page is structurally similar to the main page.
 <img width="899" alt="dbcfc72383dbe24becbf4918c572a82" src="https://github.com/user-attachments/assets/7dbeb429-c735-45b9-a786-ec8f7349b971" />
