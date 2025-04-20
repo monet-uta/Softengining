@@ -7,7 +7,7 @@ Compared to version 1.1, version 1.2 adds historical data retention and display.
 ## Main Page (`MainPage.java`)
 <img width="899" alt="dbcfc72383dbe24becbf4918c572a82" src="https://github.com/user-attachments/assets/4d46762b-ef41-4208-b3f3-21c69990181b" />
 
-### 1.1 Data Type
+### 📋 1.1 Data Type
 
 Uses the `Expense` class as the underlying data model, including:
 - `date` (transaction date)
@@ -29,7 +29,7 @@ or type：
 
 Implements JavaFX's `StringProperty` for real-time binding between data and UI components.
 
-### 1.2 Interface Structure
+### 🧩 1.2 Interface Structure
 
 - **Left Navigation Bar**
   - Provides quick switching to Chart and Details pages through icon-text buttons.
@@ -60,7 +60,7 @@ Implements JavaFX's `StringProperty` for real-time binding between data and UI c
 The history page is structurally similar to the main page.
 <img width="899" alt="dbcfc72383dbe24becbf4918c572a82" src="https://github.com/user-attachments/assets/7dbeb429-c735-45b9-a786-ec8f7349b971" />
 
-### 2.1 Data Type
+### 📋 2.1 Data Type
 
 Uses the `DataRecord` class as the base data model, including:
 - `task` (task identifier)
@@ -71,7 +71,7 @@ Uses the `DataRecord` class as the base data model, including:
 
 Each field uses JavaFX's `SimpleStringProperty` for real-time UI data binding.
 
-### 2.2 Interface Structure
+### 🧩 2.2 Interface Structure
 
 - **Left Navigation Bar**
   - Provides a month list for loading data by month upon user click.
