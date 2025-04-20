@@ -57,3 +57,8 @@ Version 1 focuses on building the foundational structure and user interface flow
 - Static interaction only; no real-time updates
 - No transaction classification or smart analytics
 
+## ✅ Version 1 (Core Features)
+
+- **Story 1 - Data Import**: Supports importing CSV and JSON files from banking apps and parsing financial data automatically.
+- **Story 2 - Categorize Correctly**: Automatically categorizes transactions, allows manual adjustments, and exports categorized charts.
+- **Story 3 - Budget Recommendations**: AI generates personalized monthly budgets based on income and spending habits; manual adjustments supported.
