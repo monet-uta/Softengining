@@ -45,7 +45,7 @@ Implements JavaFX's `StringProperty` for real-time binding between data and UI c
 
 <img width="1001" alt="ca37700a0f3b77e11e55ce25c626443" src="https://github.com/user-attachments/assets/7ea2cdfe-dbb2-4c75-93b2-34f7242a6064" />
 
-### 1.3 User Story and MainPage Feature Mapping
+### 👥 1.3 User Story and MainPage Feature Mapping
 
 | Story ID | Story Name                 | User Story Requirement                                                                                          | MainPage Implementation                                         |
 |----------|----------------------------|------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
@@ -88,7 +88,7 @@ Each field uses JavaFX's `SimpleStringProperty` for real-time UI data binding.
 
  <img width="901" alt="d42b3c164c7e42628d3e15d013ba5a4" src="https://github.com/user-attachments/assets/3a1539aa-2a0d-4b70-9994-796c05e401fa" />
 
-### 2.3 User Story and History Page Feature Mapping
+### 👥 2.3 User Story and History Page Feature Mapping
 
 | Story ID | Story Name                  | User Story Requirement                                                                                       | HistoryPage Implementation                                 |
 |----------|-----------------------------|-------------------------------------------------------------------------------------------------------------|------------------------------------------------------------|
