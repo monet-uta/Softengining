@@ -58,15 +58,15 @@ The following pie charts describes the number of consumption types in the first 
 
 ## 🤝 Student Information
 
-| Name          | QMUL Student ID | BUPT Student ID |
-|---------------|----------|---------|
-| <p align="center"><a href="https://github.com/gengzijun"><strong>Zijun Geng</strong></a></p>| <p align="center"><strong>221170571</strong></p> | <p align="center"><strong>2022213671</strong></p> |
-| <p align="center"><a href="https://github.com/monet-uta"><strong>Ye Wang</strong></a></p>| <p align="center"><strong>221170618</strong></p> | <p align="center"><strong>2022213666</strong></p> |
-| <p align="center"><a href="https://github.com/Wenrui2"><strong>Wenrui Bai</strong></a></p>| <p align="center"><strong>221170504</strong></p> | <p align="center"><strong>2022213667</strong></p> |
-| <p align="center"><a href="https://github.com/zhoujiayi2022213672"><strong>Jiayi Zhou</strong></a></p>| <p align="center"><strong>221170630</strong></p> | <p align="center"><strong>2022213672</strong></p> |
-| <p align="center"><a href="https://github.com/HeYihui-Amos"><strong>Yihui He</strong></a></p>| <p align="center"><strong>221170641</strong></p> | <p align="center"><strong>2022213679</strong></p> |
-| <p align="center"><a href="https://github.com/Gh0Zy"><strong>Yuyuan Zhao</strong></a></p>| <p align="center"><strong>221170445</strong></p> | <p align="center"><strong>2022213683</strong></p> |
-| <p align="center"><a href="https://github.com/yymm1234"><strong>Wenxuan Zeng</strong></a></p>| <p align="center"><strong>221169841</strong></p> | <p align="center"><strong>2022213608</strong></p> |
+| Name          | QMUL Student ID | BUPT Student ID | Work |
+|---------------|----------|---------|---------|
+| <p align="center"><a href="https://github.com/gengzijun"><strong>Zijun Geng</strong></a></p>| <p align="center"><strong>221170571</strong></p> | <p align="center"><strong>2022213671</strong></p> |---------|
+| <p align="center"><a href="https://github.com/monet-uta"><strong>Ye Wang</strong></a></p>| <p align="center"><strong>221170618</strong></p> | <p align="center"><strong>2022213666</strong></p> |---------|
+| <p align="center"><a href="https://github.com/Wenrui2"><strong>Wenrui Bai</strong></a></p>| <p align="center"><strong>221170504</strong></p> | <p align="center"><strong>2022213667</strong></p> |---------|
+| <p align="center"><a href="https://github.com/zhoujiayi2022213672"><strong>Jiayi Zhou</strong></a></p>| <p align="center"><strong>221170630</strong></p> | <p align="center"><strong>2022213672</strong></p> |---------|
+| <p align="center"><a href="https://github.com/HeYihui-Amos"><strong>Yihui He</strong></a></p>| <p align="center"><strong>221170641</strong></p> | <p align="center"><strong>2022213679</strong></p> |---------|
+| <p align="center"><a href="https://github.com/Gh0Zy"><strong>Yuyuan Zhao</strong></a></p>| <p align="center"><strong>221170445</strong></p> | <p align="center"><strong>2022213683</strong></p> |---------|
+| <p align="center"><a href="https://github.com/yymm1234"><strong>Wenxuan Zeng</strong></a></p>| <p align="center"><strong>221169841</strong></p> | <p align="center"><strong>2022213608</strong></p> |---------|
 
 ## 📜 Citation
 ```bib
